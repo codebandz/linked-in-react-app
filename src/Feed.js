@@ -6,6 +6,7 @@ import InputOption from './InputOption';
 import Post from './Post';
 import firebase from 'firebase';
 import { useSelector } from 'react-redux';
+import FlipMove from 'react-flip-move';
 import { selectUser } from './features/userSlice';
 
 function Feed() {
@@ -57,17 +58,23 @@ function Feed() {
                     <InputOption Icon = {CalendarViewDay} title = 'Write article' color ='#7FC15E'/>
                 </div>
             </div>
-            {posts.map(({id, data: {name, description, message,
-            photoUrl} }) => (
-               <Post
-                key = {id}
-                name = {name}
-                description = {description}
-                message = {message}
-                photoUrl = {photoUrl}
-               
-               /> 
-            ))}
+
+            <FlipMove>
+                {posts.map(({id, data: {name, description, message,
+                photoUrl} }) => (
+                <Post
+                    key = {id}
+                    name = {name}
+                    description = {description}
+                    message = {message}
+                    photoUrl = {photoUrl}
+                
+                /> 
+                ))} 
+            </FlipMove>
+
+
+           
         
         </div>
     )
