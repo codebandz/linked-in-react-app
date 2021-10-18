@@ -3,11 +3,13 @@ import './Header.css'
 import SearchIcon from '@mui/icons-material/Search';
 import HeaderOptions from './HeaderOptions';
 import { BusinessCenter, Chat, Home, Notifications, SupervisorAccount } from '@mui/icons-material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { auth } from './firebase';
-import { logout } from './features/userSlice';
+import { logout, selectUser } from './features/userSlice';
+
 
 function Header() {
+    const user = useSelector(selectUser);
 
     const dispatch = useDispatch();
 
@@ -34,7 +36,7 @@ function Header() {
                 <HeaderOptions Icon = {BusinessCenter} title = 'Jobs'/>
                 <HeaderOptions Icon = {Chat} title = 'Messaging'/>
                 <HeaderOptions Icon = {Notifications} title = 'Notifications'/>
-                <HeaderOptions avatar = "https://www.svgrepo.com/show/2176/man.svg"
+                <HeaderOptions avatar = {user?.photoUrl}
                  title = 'me'
                  onClick = {logoutOfApp}   
                  />
