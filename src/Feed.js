@@ -1,10 +1,13 @@
 import { CalendarViewDay, Create, EventNote, Image, Subscriptions } from '@mui/icons-material'
-import React from 'react'
+import React, { useState } from 'react'
 import './Feed.css'
 import InputOption from './InputOption'
 import Post from './Post'
 
 function Feed() {
+
+    const [posts, setPosts] = useState([])
+
     return (
         <div className = 'feed'>
             <div className="feed_inputContainer">
@@ -22,6 +25,9 @@ function Feed() {
                     <InputOption Icon = {CalendarViewDay} title = 'Write article' color ='#7FC15E'/>
                 </div>
             </div>
+            {posts.map((post) => (
+               <Post/> 
+            ))}
             <Post 
                 name = 'Tony Ngeno'
                 description = 'This is a test'
