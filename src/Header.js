@@ -1,9 +1,8 @@
 import React from 'react'
 import './Header.css'
 import SearchIcon from '@mui/icons-material/Search';
-import HomeIcon from '@mui/icons-material/Search';
 import HeaderOptions from './HeaderOptions';
-import { SupervisorAccount } from '@mui/icons-material';
+import { BusinessCenter, Chat, Home, Notifications, SupervisorAccount } from '@mui/icons-material';
 
 function Header() {
     return (
@@ -19,8 +18,11 @@ function Header() {
             </div>
 
             <div className = 'header_right'>
-                <HeaderOptions Icon = {HomeIcon} title = 'Home'/>
+                <HeaderOptions Icon = {Home} title = 'Home'/>
                 <HeaderOptions Icon = {SupervisorAccount} title = 'My Network'/>
+                <HeaderOptions Icon = {BusinessCenter} title = 'Jobs'/>
+                <HeaderOptions Icon = {Chat} title = 'Messaging'/>
+                <HeaderOptions Icon = {Notifications} title = 'Notifications'/>
             </div>
 
         </div>
