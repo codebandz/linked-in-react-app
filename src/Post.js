@@ -1,5 +1,7 @@
+import { ThumbUpAltOutlined } from '@mui/icons-material';
 import { Avatar } from '@mui/material';
 import React from 'react';
+import InputOption from './InputOption';
 import './Post.css'
 
 function Post({name, description, message , photoUrl}) {
@@ -8,13 +10,17 @@ function Post({name, description, message , photoUrl}) {
            <div className="post_header">
                <Avatar/>
                <div className="post_info">
-                   <h2>Tony Ngeno</h2>
-                   <p>Description</p>
+                   <h2>{name}</h2>
+                   <p>{description}</p>
                </div>
            </div>
 
            <div className="post_body">
-               <p>Message Goes Here</p>
+               <p>{message}</p>
+           </div>
+
+           <div className="post_buttons">
+               <InputOption Icon = {ThumbUpAltOutlined} title = 'Like' color = 'gray' />
            </div>
 
        </div>
