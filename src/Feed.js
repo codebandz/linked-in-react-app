@@ -2,6 +2,7 @@ import { CalendarViewDay, Create, EventNote, Image, Subscriptions } from '@mui/i
 import React from 'react'
 import './Feed.css'
 import InputOption from './InputOption'
+import Post from './Post'
 
 function Feed() {
     return (
@@ -21,6 +22,11 @@ function Feed() {
                     <InputOption Icon = {CalendarViewDay} title = 'Write article' color ='#7FC15E'/>
                 </div>
             </div>
+            <Post 
+                name = 'Tony Ngeno'
+                description = 'This is a test'
+                message = 'It worked.Wow!'
+            />
         </div>
     )
 }
