@@ -5,11 +5,15 @@ import { db } from './firebase';
 import InputOption from './InputOption';
 import Post from './Post';
 import firebase from 'firebase';
+import { useSelector } from 'react-redux';
+import { selectUser } from './features/userSlice';
 
 function Feed() {
 
     const [input, setInput] = useState('');
     const [posts, setPosts] = useState([]);
+    const user = useSelector(selectUser);
+
 
     useEffect(() => {
         db.collection("posts").orderBy('timestamp', 'desc').onSnapshot(snapshot => {
@@ -26,10 +30,10 @@ function Feed() {
         e.preventDefault();
 
         db.collection('posts').add({
-            name: 'Tony Ngeno',
-            description: 'This is a test',
+            name: user.displayName,
+            description: user.email,
             message: input,
-            photoUrl: '',
+            photoUrl: user.photoUrl || "",
             timestamp:firebase.firestore.FieldValue.serverTimestamp(),
         });
 
