@@ -23,6 +23,7 @@ function Header() {
                 <HeaderOptions Icon = {BusinessCenter} title = 'Jobs'/>
                 <HeaderOptions Icon = {Chat} title = 'Messaging'/>
                 <HeaderOptions Icon = {Notifications} title = 'Notifications'/>
+                <HeaderOptions avatar = "https://www.svgrepo.com/show/2176/man.svg" title = 'me'/>
             </div>
 
         </div>
