@@ -1,12 +1,40 @@
-import { CalendarViewDay, Create, EventNote, Image, Subscriptions } from '@mui/icons-material'
-import React, { useState } from 'react'
-import './Feed.css'
-import InputOption from './InputOption'
-import Post from './Post'
+import { CalendarViewDay, Create, EventNote, Image, Subscriptions } from '@mui/icons-material';
+import React, { useEffect, useState } from 'react';
+import './Feed.css';
+import { db } from './firebase';
+import InputOption from './InputOption';
+import Post from './Post';
+import firebase from 'firebase';
 
 function Feed() {
 
-    const [posts, setPosts] = useState([])
+    const [input, setInput] = useState('');
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        db.collection("posts").orderBy('timestamp', 'desc').onSnapshot(snapshot => {
+            setPosts(snapshot.docs.map(doc => (
+                {
+                    id:doc.id,
+                    data:doc.data(),
+                }
+            )))
+        })
+    }, [])
+
+    const sendPost = e => {
+        e.preventDefault();
+
+        db.collection('posts').add({
+            name: 'Tony Ngeno',
+            description: 'This is a test',
+            message: input,
+            photoUrl: '',
+            timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+        });
+
+        setInput('');
+    }
 
     return (
         <div className = 'feed'>
@@ -14,8 +42,8 @@ function Feed() {
                 <div className="feed_input">
                     <Create/>
                     <form>
-                        <input placeholder = 'Start a Post' type="text"/>
-                        <button type = 'submit'>Send</button>
+                        <input value = {input} onChange = {e => setInput(e.target.value)} placeholder = 'Start a Post' type="text"/>
+                        <button  onClick = {sendPost} type = 'submit'>Send</button>
                     </form>
                 </div>
                 <div className="feed_inputOptions">
@@ -25,14 +53,18 @@ function Feed() {
                     <InputOption Icon = {CalendarViewDay} title = 'Write article' color ='#7FC15E'/>
                 </div>
             </div>
-            {posts.map((post) => (
-               <Post/> 
+            {posts.map(({id, data: {name, description, message,
+            photoUrl} }) => (
+               <Post
+                key = {id}
+                name = {name}
+                description = {description}
+                message = {message}
+                photoUrl = {photoUrl}
+               
+               /> 
             ))}
-            <Post 
-                name = 'Tony Ngeno'
-                description = 'This is a test'
-                message = 'It worked.Wow!'
-            />
+        
         </div>
     )
 }

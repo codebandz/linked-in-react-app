@@ -34,7 +34,7 @@
 .sidebar_stat {
     margin-top: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 .sidebar_stat > p {
     color: gray;
